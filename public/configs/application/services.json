@@ -1,4 +1,13 @@
 {
-	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/servicesFile.schema.json",
-	"services": {}
+    "$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/servicesFile.schema.json",
+    "services": {
+        "SampleService": {
+            "bootParams": {
+                "stage": "preuser",
+                "dependencies": []
+            },
+            "name": "SampleService",
+            "html": "$applicationRoot/services/Sample/Sample.html"
+        }
+    }
 }

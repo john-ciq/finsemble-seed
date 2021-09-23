@@ -1,1 +1,6 @@
-{}
+{
+    "SampleApp": {
+        "output": "components/SampleApp/SampleApp",
+        "entry": "./src/components/SampleApp/SampleApp.js"
+    }
+}
