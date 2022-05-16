@@ -12,8 +12,7 @@ In the enclosed _LoggingExportAppService.js_ file, look for `//TODO:` comments w
 ## Installation ##
 The AppService is preconfigured in this seed, however installation steps are included which illustrate a manual installation.
 
-1. Copy the enclosing directory to your seed project at: _/src/components/loggingExportAppService_
-so that you have files:
+1. Copy the enclosing directory to your seed project at: _/src/components/loggingExportAppService_ so that you have files:
 - _/src/components/loggingExportAppService/LoggingExportAppService.html_
 - _/src/components/loggingExportAppService/LoggingExportAppService.js_
 - _/src/components/loggingExportAppService/config.json_
