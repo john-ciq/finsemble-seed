@@ -26,15 +26,13 @@ The AppService is preconfigured in this seed, however installation steps are inc
 Finsemble 6 does not support the `appService` attribute defined in `config.json` so the following settings will need to be manually added in order to run within a Finsemble 6 environment, the following must be set within the appd configuration:
 
 ```
-appDConfig.manifest.bootParams.autoStart = true;
-appDConfig.manifest.bootParams.stage = "preuser";
 appDConfig.manifest.window.frame = true;
 appDConfig.manifest.window.options.autoShow = false;
 appDConfig.manifest.foreign.components["Window Manager"].FSBLHeader = false;
 appDConfig.manifest.foreign.components["windowService"].manageWindowMovement = false;
 appDConfig.manifest.foreign.components["App Launcher"].launchableByUser = false;
 appDConfig.manifest.component.singleton = true;
-appDConfig.manifest.component.spawnOnStartup = appDConfig.manifest.bootParams.autoStart;
+appDConfig.manifest.component.spawnOnStartup = true;
 ```
 
 The entire entry would look like:
