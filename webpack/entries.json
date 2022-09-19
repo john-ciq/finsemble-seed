@@ -1,0 +1,5 @@
+[
+    "./src/Toolbar/index.tsx",
+    "./src/components/testcomponent/testcomponent.js",
+    "./src/preloads/testpreload.js"
+]

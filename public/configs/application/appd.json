@@ -230,7 +230,7 @@
             "name": "testcomponent",
             "manifest": {
                 "window": {
-                    "url": "$applicationRoot/components/testcomponent/testcomponent.html"
+                    "url": "$applicationRoot/components/testcomponent/index.html"
                 },
                 "component": {
                     "preload": "$applicationRoot/preloads/testpreload.js"
