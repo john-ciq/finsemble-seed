@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const FSBLReady = () => {
 	try {
 		// Do things with FSBL in here.
