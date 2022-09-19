@@ -208,7 +208,8 @@
 			},
 			"component": {
 				"category": "system",
-				"preload": "$applicationRoot/preloads/registration.js"
+				"preload": "$moduleRoot/preloads/registration.js"
+
 			},
 			"foreign": {
 				"services": {
