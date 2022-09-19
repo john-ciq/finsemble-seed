@@ -39,6 +39,9 @@
     },
     "importConfig": [
       "../../configs/application/config.json"
+    ],
+    "trustedPreloads": [
+      "http://localhost:3375/build/preloads/testpreload.js"
     ]
   },
   "finsemble-electron-adapter": {
