@@ -113,6 +113,38 @@
 		"floatingTitlebarComponent": "Floating Titlebar"
 	},
 	"globalHotkeys": {},
-	"importConfig": ["$configRoot/application/appd.json", "$configRoot/application/apps.json"],
-	"toolbarMenus": {}
+	"importConfig": [
+		"$configRoot/application/appd.json",
+		"$configRoot/application/apps.json"
+	],
+	"toolbarMenus": {},
+	"components": {
+		"YesNoDialog": {
+			"uiComponent": true,
+			"bootParams": {
+				"stage": "earlyuser",
+				"dependencies": [
+					"Toolbar"
+				]
+			},
+			"window": {
+				"url": "$applicationRoot/YesNoDialog/index.html",
+				"width": 500,
+				"height": 223,
+				"position": "absolute",
+				"top": "center",
+				"left": "center"
+			},
+			"component": {
+				"spawnOnStartup": true
+			},
+			"foreign": {
+				"clients": {
+					"dialogManager": {
+						"isDialog": true
+					}
+				}
+			}
+		}
+	}
 }
