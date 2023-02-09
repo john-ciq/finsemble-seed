@@ -4,11 +4,16 @@ import { FinsembleCSS, FinsembleProvider } from "@finsemble/finsemble-core";
 import { FEAGlobals } from "@finsemble/finsemble-core/";
 import { FinsembleDialog } from "@finsemble/finsemble-core/dist/lib/ui/components/legacyControls/FinsembleDialog";
 
+// The timer component for dialogs with expiration
 import Timer from "@finsemble/finsemble-core/dist/lib/ui/components/yesNoDialog/timer";
 
+// Response options for the dialog to return to the opening code
 type ResponseOptions = "affirmative" | "negative" | "cancel" | "expired";
 
+// The default title
 const DEFAULT_TITLE = "Yes or No Dialog";
+
+// The default component state
 const DEFAULT_COMPONENT_STATE = {
 	question: "",
 	negativeResponseLabel: "No",
@@ -19,6 +24,7 @@ const DEFAULT_COMPONENT_STATE = {
 	showCancelButton: true,
 };
 
+// Params sent in by the opener
 interface YesNoDialogParams {
 	title?: string;
 	question?: string;
@@ -33,11 +39,19 @@ interface YesNoDialogParams {
 	timerDuration?: number | null;
 }
 
+// React props
 interface ICustomYesNoDialogProps {
 	title?: string;
 }
 
+/**
+ * A custom Yes/No dialog.
+ *
+ * @param props props for this React component
+ * @returns a rendered component
+ */
 const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
+	// State information
 	const [newRequest, setNewRequest] = useState(false);
 	const [title, setTitle] = useState<string>(DEFAULT_TITLE);
 	const [question, setQuestion] = useState<string>(DEFAULT_COMPONENT_STATE.question);
@@ -67,8 +81,8 @@ const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
 			choice,
 			hideModalOnClose,
 		});
-		// This will detach the timer component from the dom. Next time the component comes up,
-		// it'll have a fresh timer.
+		// Detach the timer component from the DOM; this causes a new timer for the next time this
+		// dialog is requested
 		setShowTimer(false);
 		setNewRequest(false);
 	};
@@ -87,14 +101,13 @@ const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
 	};
 
 	/**
-	 * When the opener requests that the dialog show itself, it also passes in initialization data.
-	 * This function grabs that data, calls setState, and then fits the window to the contents of
-	 * the DOM. Then we call `showDialog`, which will display the dialog on the proper monitor.
+	 * Invoked when this dialog has been requested. The "data" is sent in from the opener.
 	 *
 	 * @param {any} err
 	 * @param {any} response
 	 */
 	const onShowRequested = (err, { data }: { data: YesNoDialogParams }) => {
+		// Set state from the passed in data
 		setTitle(data.title ?? DEFAULT_TITLE);
 		setHideModalOnClose(data.hideModalOnClose ?? true);
 		setQuestion(data.question ?? DEFAULT_COMPONENT_STATE.question);
@@ -119,11 +132,13 @@ const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
 		});
 	};
 
+	// Helper functions for sending the response to the opener
 	const sendAffirmativeResponse = () => sendResponse("affirmative");
 	const sendNegativeResponse = () => sendResponse("negative");
 	const sendCancelResponse = () => sendResponse("cancel");
 	const sendExpiredResponse = () => sendResponse("expired")
 
+	// Add the keydown listener (to handle Escape/Enter behavior)
 	useEffect(() => {
 		document.body.addEventListener("keydown", handleKeydownOnBody);
 	}, []);
@@ -142,6 +157,7 @@ const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
 		newRequest,
 	]);
 
+	// The component representation
 	return (
 		<FinsembleDialog
 			userInputTimeout={10000}
@@ -173,6 +189,7 @@ const CustomYesNoDialog = (props: ICustomYesNoDialogProps) => {
 	);
 };
 
+// Render the component
 ReactDOM.render(
 	<FinsembleProvider>
 		<FinsembleCSS />
