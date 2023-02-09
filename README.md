@@ -1,7 +1,7 @@
 [![Finsemble SmartDesktop](./public/assets/img/Finsemble+Cosaic.svg)](https://documentation.finsemble.com/)
 
 # Finsemble Seed Yes/No Dialog Example🌱
-This example serves to illustrate how to create a custom dialog leveraging the existing Dialog API.
+This example illustrates how to create a custom dialog by modifying existing dialog templates.
 
 # Creating
 1. Run the command `yarn template YesNoDialog`
@@ -13,5 +13,5 @@ This example serves to illustrate how to create a custom dialog leveraging the e
 2. Open at least one app
 3. Save the current workspace
 4. Move at least one of the open apps
-5. Attempt to change workspaces
+5. Attempt to change workspaces, causing a workspace dirty check and prompt
 6. Observe that the the newly created custom dialog is used in place of the current "Yes/No" dialog
