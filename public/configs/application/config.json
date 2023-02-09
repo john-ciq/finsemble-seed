@@ -71,9 +71,6 @@
 			"hideTitleBars": false
 		},
 		"docking": {
-			"claimSpace": {
-				"enabled": false
-			},
 			"enabled": true,
 			"groupTileBuffer": 30,
 			"headerHeight": 32,
