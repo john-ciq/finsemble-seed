@@ -1,6 +1,6 @@
 [![Finsemble SmartDesktop](./public/assets/img/Finsemble+Cosaic.svg)](https://documentation.finsemble.com/)
 
-# Finsemble Seed Custom Dialog Using DialogManager API Example🌱
+# Finsemble Seed Custom Dialog Using DialogManager API Example
 This example illustrates how to create a custom dialog by adding `DialogManager` API calls into a standard component.
 
 # Introduction
@@ -10,7 +10,7 @@ Standard components may act as as dialog using the `DialogManager` API calls. Th
 3. The component sends results to the opening code using `FEAGlobals.FSBL.Clients.DialogManager.respondToOpener`
 
 # Creating
-1. Modify a component app definition to act as a singleton (see `public/configs/application/apps.json`)
+1. Modify an existing standard component definition to *act as a singleton* (see `public/configs/application/apps.json`)
 2. Update the contents of the standard component with the DialogManager API code example found in `src/NonDialogComponent/index.tsx`
 
 # Running
