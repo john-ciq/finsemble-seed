@@ -8,7 +8,7 @@ import { FEAGlobals } from "@finsemble/finsemble-core/";
 export type NonDialogComponentProps = {};
 
 /**
- * Implements a Finsemble dialog using API calls only. This component is a regular component which
+ * Implements a Finsemble dialog using API calls only. This component is a standard component which
  * uses DialogManager API calls in order to integrate and function as a dialog.
  *
  * It is important to note that this component works well when configured as a singleton (see the
@@ -63,7 +63,9 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 			if (!err) {
 				// NOTE: Invoking "showDialog" will inform the DialogManager to display this component
 				//       as a dialog (which will be centered on the screen and visually different than
-				//       a typical component).
+				//       a standard component).
+				//
+				// NOTE: request.data contains data passed in via the open call.
 				//
 				// Show this dialog
 				FEAGlobals.FSBL.Clients.DialogManager.showDialog();
@@ -73,6 +75,7 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 
 	// The dialog markup
 	return <div>
+		{/* // TODO: Update the dialog text */}
 		<div>Dialog text goes here</div>
 		<button onClick={respondNope}>Nope</button>
 		<button onClick={respondMaybe}>Maybe</button>
