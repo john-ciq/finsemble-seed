@@ -1,11 +1,16 @@
 [![Finsemble SmartDesktop](./public/assets/img/Finsemble+Cosaic.svg)](https://documentation.finsemble.com/)
 
-# Finsemble Seed Yes/No Dialog Example🌱
+# Finsemble Seed Yes/No Dialog Example
 This example illustrates how to create a custom dialog by modifying existing dialog templates.
+
+# Introduction
+Finsemble's dialog components may be customized. The integration happens in two steps:
+1. Create a template from an existing dialog using the Finsemble CLI
+2. Augment the template to fulfill requirements
 
 # Creating
 1. Run the command `yarn template YesNoDialog`
-2. Update the contents of the newly created `index.tsx` file with the example code in `src\YesNoDialog\index.tsx`
+2. Update the contents of the newly created `index.tsx` file with the example code in `src/YesNoDialog/index.tsx`
 3. Modify as necessary
 
 # Running
