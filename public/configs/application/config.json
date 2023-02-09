@@ -71,6 +71,9 @@
 			"hideTitleBars": false
 		},
 		"docking": {
+			"claimSpace": {
+				"enabled": false
+			},
 			"enabled": true,
 			"groupTileBuffer": 30,
 			"headerHeight": 32,
@@ -113,10 +116,7 @@
 		"floatingTitlebarComponent": "Floating Titlebar"
 	},
 	"globalHotkeys": {},
-	"importConfig": [
-		"$configRoot/application/appd.json",
-		"$configRoot/application/apps.json"
-	],
+	"importConfig": ["$configRoot/application/appd.json", "$configRoot/application/apps.json"],
 	"toolbarMenus": {},
 	"components": {
 		"YesNoDialog": {
