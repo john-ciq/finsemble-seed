@@ -27,7 +27,7 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	 * @param choice the user-selected choice to return to the opener
 	 * @returns a Promise once complete
 	 */
-	const respondToOpener = (choice) => {
+	const respond = (choice) => {
 		// NOTE: This call will resolve the promise created by the opener with the "choice" passed in
 		FEAGlobals.FSBL.Clients.DialogManager.respondToOpener({ choice });
 	}
@@ -37,21 +37,21 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	 *
 	 * @returns a promise once the response has been sent to the opener
 	 */
-	const respondNope = () => respondToOpener("Nope");
+	const respondNope = () => respond("Nope");
 
 	/**
 	 * Responds with a choice of "Maybe" to the opener.
 	 *
 	 * @returns a promise once the response has been sent to the opener
 	 */
-	const respondMaybe = () => respondToOpener("Maybe");
+	const respondMaybe = () => respond("Maybe");
 
 	/**
 	 * Responds with a choice of "OK" to the opener.
 	 *
 	 * @returns a promise once the response has been sent to the opener
 	 */
-	const respondOK = () => respondToOpener("OK");
+	const respondOK = () => respond("OK");
 
 	// Invoked when this component is created and used to register with the DialogManager
 	React.useEffect(() => {
