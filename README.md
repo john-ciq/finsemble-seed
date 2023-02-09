@@ -1,17 +1,31 @@
 [![Finsemble SmartDesktop](./public/assets/img/Finsemble+Cosaic.svg)](https://documentation.finsemble.com/)
 
 # Finsemble Seed Custom Dialog Using DialogManager API Example🌱
-This example illustrates how to create a custom dialog by adding `DialogManager` API calls into a regular component.
+This example illustrates how to create a custom dialog by adding `DialogManager` API calls into a standard component.
+
+# Introduction
+Standard components may act as as dialog using the `DialogManager` API calls. This integration happens in three steps:
+1. The component registers as a dialog using `FEAGlobals.FSBL.Clients.DialogManager.registerDialogCallback`
+2. The component requests to be displayed as a dialog using `FEAGlobals.FSBL.Clients.DialogManager.showDialog`
+3. The component sends results to the opening code using `FEAGlobals.FSBL.Clients.DialogManager.respondToOpener`
 
 # Creating
-1. Modify a component
-2. Update the contents of the newly created `index.tsx` file with the example code in `src\YesNoDialog\index.tsx`
-3. Modify as necessary
+1. Modify a component app definition to act as a singleton (see `public/configs/application/apps.json`)
+2. Update the contents of the standard component with the DialogManager API code example found in `src/NonDialogComponent/index.tsx`
 
 # Running
 1. Run the command `yarn dev`
-2. Open at least one app
-3. Save the current workspace
-4. Move at least one of the open apps
-5. Attempt to change workspaces, causing a workspace dirty check and prompt
-6. Observe that the the newly created custom dialog is used in place of the current "Yes/No" dialog
+2. From any Finsemble component, run this code:
+```
+FSBL.Clients.DialogManager.open(
+  "NonDialogComponent",
+  {
+    // Pass some data, which will be passed into the FSBL.Clients.DialogManager.registerDialogCallback
+    someData: 12345
+  },
+  // The callback
+  (err, res) => {
+    console.log(err, res);
+  }
+);
+```
