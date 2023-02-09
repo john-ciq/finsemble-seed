@@ -3,6 +3,46 @@
 	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/appsConfigFile.schema.json",
 	"apps": [
 		{
+			"appId": "NonDialogComponent",
+			"name": "NonDialogComponent",
+			"type": "web",
+			"description": "Non dialog component acting as a dialog using API calls",
+			"details": {
+				"url": "$applicationRoot/NonDialogComponent/index.html"
+			},
+			"hostManifests": {
+				"Finsemble": {
+					"window": {
+						"height": 65,
+						"width": 170,
+						"options": {
+							"autoShow": false,
+							"minWidth": 150
+						}
+					},
+					"component": {
+						"singleton": true
+					},
+					"foreign": {
+						"components": {
+							"App Launcher": {
+								"launchableByUser": false
+							},
+							"Window Manager": {
+								"FSBLHeader": false,
+								"persistWindowState": false
+							}
+						}
+					}
+				}
+			},
+			"version": "1.0.0",
+			"tooltip": "Dialog Example",
+			"contactEmail": "info@finsemble.io",
+			"supportEmail": "support@finsemble.com",
+			"publisher": "Finsemble"
+		},
+		{
 			"appId": "ChartIQ Example App",
 			"name": "ChartIQ Example App",
 			"type": "web",
