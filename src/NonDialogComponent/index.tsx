@@ -27,9 +27,9 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	 * @param choice the user-selected choice to return to the opener
 	 * @returns a Promise once complete
 	 */
-	const respond = (choice) => {
+	const respond = (choice, selections: string[] = []) => {
 		// NOTE: This call will resolve the promise created by the opener with the "choice" passed in
-		FEAGlobals.FSBL.Clients.DialogManager.respondToOpener({ choice });
+		FEAGlobals.FSBL.Clients.DialogManager.respondToOpener({ choice, selections });
 	}
 
 	/**
@@ -47,11 +47,17 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	const respondMaybe = () => respond("Maybe");
 
 	/**
-	 * Responds with a choice of "OK" to the opener.
+	 * Responds with the selected cheeses.
 	 *
 	 * @returns a promise once the response has been sent to the opener
 	 */
-	const respondOK = () => respond("OK");
+	const respondOK = () => {
+		const selections: string[] = Array.from(document?.getElementById("cheeses")?.["options"])
+			.filter((opt: any) => opt.selected)
+			.map((opt: any) => opt.value);
+
+		respond("OK", selections);
+	}
 
 	// Invoked when this component is created and used to register with the DialogManager
 	React.useEffect(() => {
@@ -76,10 +82,22 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	// The dialog markup
 	return <div>
 		{/* // TODO: Update the dialog text */}
-		<div>Dialog text goes here</div>
-		<button onClick={respondNope}>Nope</button>
-		<button onClick={respondMaybe}>Maybe</button>
-		<button onClick={respondOK}>OK</button>
+		<label htmlFor="cheeses">Choose your cheese:</label>
+
+		<div>
+			<select name="cheeses" id="cheeses" multiple>
+				<option value="mozzarella">Mozzarella</option>
+				<option value="ricotta">Ricotta</option>
+				<option value="parmesan">Parmesan</option>
+				<option value="swiss">Swiss</option>
+			</select>
+		</div>
+
+		<div>
+			<button onClick={respondNope}>Nope</button>
+			<button onClick={respondMaybe}>Maybe</button>
+			<button onClick={respondOK}>OK</button>
+		</div>
 	</div>;
 
 };

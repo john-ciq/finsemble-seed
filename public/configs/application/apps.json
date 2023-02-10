@@ -13,11 +13,11 @@
 			"hostManifests": {
 				"Finsemble": {
 					"window": {
-						"height": 65,
-						"width": 170,
+						"height": 130,
+						"width": 160,
 						"options": {
 							"autoShow": false,
-							"minWidth": 150
+							"minWidth": 160
 						}
 					},
 					"component": {
