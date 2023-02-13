@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { FinsembleCSS, FinsembleProvider } from "@finsemble/finsemble-core";
-import { FEAGlobals } from "@finsemble/finsemble-core/";
 
 
 // TODO: Insert any desired props here
@@ -29,7 +28,7 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 	 */
 	const respond = (choice, selections: string[] = []) => {
 		// NOTE: This call will resolve the promise created by the opener with the "choice" passed in
-		FEAGlobals.FSBL.Clients.DialogManager.respondToOpener({ choice, selections });
+		FSBL.Clients.DialogManager.respondToOpener({ choice, selections });
 	}
 
 	/**
@@ -65,7 +64,7 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 		//
 		// The callback is invoked every time the DialogManagerClient requests that this dialog
 		// be displayed
-		FEAGlobals.FSBL.Clients.DialogManager.registerDialogCallback((err, request) => {
+		FSBL.Clients.DialogManager.registerDialogCallback((err, request) => {
 			if (!err) {
 				// NOTE: Invoking "showDialog" will inform the DialogManager to display this component
 				//       as a dialog (which will be centered on the screen and visually different than
@@ -74,7 +73,7 @@ export const NonDialogComponent: React.FunctionComponent<NonDialogComponentProps
 				// NOTE: request.data contains data passed in via the open call.
 				//
 				// Show this dialog
-				FEAGlobals.FSBL.Clients.DialogManager.showDialog();
+				FSBL.Clients.DialogManager.showDialog();
 			}
 		});
 	}, []);
