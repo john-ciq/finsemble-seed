@@ -1,0 +1,4 @@
+[
+	"./src/launch-group-communicator/index.ts",
+	"./src/SampleApp/index.tsx"
+]
