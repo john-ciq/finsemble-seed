@@ -3,45 +3,12 @@
 import { FDC3, types } from "@finsemble/finsemble-core";
 
 
-// The context type for launched peers to communicate on
-const CONTEXT_TYPE_LAUNCH_GROUP = "x-launch-group";
-// The field name in component storage for the channel name
-const COMPONENT_STATE_FIELD_CHANNEL_NAME = "x-launch-group-channel-name";
-
-
 // TODO: Implementation should be sure that this function is modified to process incoming messages
 const launchGroupBridge = (window as any);
 launchGroupBridge.onLaunchGroupMessage = (payload) => {
 	console.log("DEFAULT onLaunchGroupMessage implementation:", payload);
 }
 
-// Flag to determine if the launch group being used is from component storage
-let usingStoredLaunchGroup = false;
-
-/**
- * Saves the name of a channel to use for future component invocations.
- *
- * @param launchedGroupChannelName the name of the channel to save
- */
-const saveLaunchedGroupChannelName = async (launchedGroupChannelName) => {
-	if (!!usingStoredLaunchGroup) {
-		// console.log("not persisting new channel name; using current persisted channel name");
-	} else {
-		// console.log('saving component state', COMPONENT_STATE_FIELD_CHANNEL_NAME, launchedGroupChannelName);
-		// console.log('persisting channel name for future use', launchedGroupChannelName);
-		await FSBL.Clients.WindowClient.setComponentState({ field: COMPONENT_STATE_FIELD_CHANNEL_NAME, value: launchedGroupChannelName });
-	}
-}
-
-/**
- * Creates a unique channel name, seeded from the supplied channel name.
- *
- * @param launchedGroupChannelName the name of the channel
- * @returns a unique variation of the channel
- */
-const createUniqueLaunchedGroupChannelName = (launchedGroupChannelName) => {
-	return `uiq-${launchedGroupChannelName}-${new Date().getTime()}-${Math.random()}`;
-}
 
 /**
  * Gets the name of the channel to listen to for this launched peer group. This might be the launch group id, or
@@ -50,41 +17,55 @@ const createUniqueLaunchedGroupChannelName = (launchedGroupChannelName) => {
  * @returns the channel to listen to for this launched peer group
  */
 const getLaunchedGroupChannelName = async () => {
+	// The field name in component storage for the channel name
+	const COMPONENT_STATE_FIELD_CHANNEL_NAME = "x-launch-group-channel-name";
+
+
+	/**
+	 * Saves the name of a channel to use for future component invocations.
+	 *
+	 * @param launchedGroupChannelName the name of the channel to save
+	 */
+	const saveLaunchedGroupChannelName = (launchedGroupChannelName) => FSBL.Clients.WindowClient.setComponentState({ field: COMPONENT_STATE_FIELD_CHANNEL_NAME, value: launchedGroupChannelName });
+
+
+	// Get the launchGroupId from the window options
+	//
+	// The launchGroupId exists when a launch group has been spawned; restoring the workspace will NOT retain the launchGroupId
+	// currently, however this code will persist a launch group id suitable for subsequent reloads.
 	let launchGroupId = ((await finsembleWindow.getOptions())?.data as any)?.windowInterop?.launchGroupId;
 
-	if (!launchGroupId) {
-		// Get the launch group channel name from component state
-		// console.log("There is no launch group id, checking component state");
-		let { data: componentStateLaunchGroupId } = await FSBL.Clients.WindowClient.getComponentState({ field: COMPONENT_STATE_FIELD_CHANNEL_NAME });
-		if (!componentStateLaunchGroupId) {
-			// console.log("There is no persisted launch group id, will not attach a listener");
-			return null;
-		} else {
-			usingStoredLaunchGroup = true;
-			launchGroupId = componentStateLaunchGroupId;
-		}
-	}
 
-	// Return the channel name
-	return `${launchGroupId}`;
+	if (!launchGroupId) {
+		// There is no launch group id; either this component was not launched in a group OR this component is being reloaded and the
+		// channel name is persisted in the component state
+		//
+		// Check for the launch group channel name in the component state
+		console.info("There is no launch group id, checking component state");
+		const { data: componentStateLaunchGroupId } = await FSBL.Clients.WindowClient.getComponentState({ field: COMPONENT_STATE_FIELD_CHANNEL_NAME });
+		return componentStateLaunchGroupId;
+	} else {
+		// TODO: Attach store listeners only once
+
+		// Sync and persist the brokered channel name
+		// 1.) Create a unique channel name
+		const persistedChannelName = `uiq-${launchGroupId}-${new Date().getTime()}-${Math.random()}`;
+		// 2.) Save in component state
+		await saveLaunchedGroupChannelName(persistedChannelName);
+		// Add a listener to the distributed store; the listener will receive any updated future channel and persist that in the component state
+		let { data: store } = await FSBL.Clients.DistributedStoreClient.createGlobalStore({ store: launchGroupId });
+		// 3.) Listen for any updates from the store and save the new channel in the component state
+		store?.addListener([launchGroupId, 'channelName'], (err, res) => saveLaunchedGroupChannelName(res.value));
+		// 4.) Publish the new name to the distributed store
+		store?.set([launchGroupId, 'channelName'], persistedChannelName);
+
+		return launchGroupId;
+	}
 }
 
 const main = async (launchGroupBridge: any) => {
-
-	/**
-	 * Send messages to other components in the launch group. Any component in the launch group
-	 * which has "launchGroupBridge.onLaunchGroupMessage" defined will receive this message.
-	 *
-	 * @param messageData the data to send
-	 */
-	const sendMessageToLaunchedGroup = (messageData) => {
-		launchedGroupFdc3Channel.broadcast({
-			type: CONTEXT_TYPE_LAUNCH_GROUP,
-			id: {
-				payload: JSON.stringify(messageData)
-			}
-		});
-	}
+	// The context type for launched peers to communicate on
+	const CONTEXT_TYPE_LAUNCH_GROUP = "x-launch-group";
 
 
 	// TODO: Do not re-attach a listener if the launchGroupBridge is already listening
@@ -92,6 +73,7 @@ const main = async (launchGroupBridge: any) => {
 
 	// Get the launched group channel name
 	const launchedGroupFdc3ChannelName = await getLaunchedGroupChannelName();
+	// Check the value
 	if (!launchedGroupFdc3ChannelName) {
 		console.warn("There is no launch group id, will not attach a listener");
 		return;
@@ -108,30 +90,27 @@ const main = async (launchGroupBridge: any) => {
 
 		// If there is a payload, then delegate to the launch group message handler
 		if (messageData.payload) {
-			// console.log('got payload', messageData.payload);
 			launchGroupBridge?.onLaunchGroupMessage?.(JSON.parse(messageData.payload));
 		}
 	});
-	// console.log('listening to', launchedGroupFdc3Channel.id);
-
-	// Synch and persist the brokered channel name
-	if (!usingStoredLaunchGroup) {
-		// 1.) Create a unique channel name
-		const persistedChannelName = createUniqueLaunchedGroupChannelName(launchedGroupFdc3ChannelName);
-		// 2.) Save in component state
-		await saveLaunchedGroupChannelName(persistedChannelName);
-		// Add a listener to the distributed store; the listener will receive any updated future channel and persist that in the component state
-		let { data: store } = await FSBL.Clients.DistributedStoreClient.createGlobalStore({ store: launchedGroupFdc3ChannelName });
-		// 3.) Listen on signal for any updates <-- This is done in the addition of the context listener (but timing issues abound)
-		store?.addListener([launchedGroupFdc3ChannelName, 'channelName'], (err, res) => saveLaunchedGroupChannelName(res.value));
-		//
-		// 4.) Publish the new name to the distributed store
-		store?.set([launchedGroupFdc3ChannelName, 'channelName'], persistedChannelName);
-	}
 
 
+	/**
+	 * Send messages to other components in the launch group. Any component in the launch group
+	 * which has "launchGroupBridge.onLaunchGroupMessage" defined will receive this message.
+	 *
+	 * @param messageData the data to send
+	 */
 	// Append the "sendMessageToLaunchedGroup" to the launchGroupBridge object
-	launchGroupBridge.sendMessageToLaunchedGroup = sendMessageToLaunchedGroup;
+	launchGroupBridge.sendMessageToLaunchedGroup = (messageData) => {
+		launchedGroupFdc3Channel.broadcast({
+			type: CONTEXT_TYPE_LAUNCH_GROUP,
+			id: {
+				payload: JSON.stringify(messageData)
+			}
+		});
+	};
+
 
 	// Print a warning if the component does not define "launchGroupBridge.onLaunchGroupMessage"
 	if ("function" !== typeof launchGroupBridge.onLaunchGroupMessage) {
