@@ -4,10 +4,7 @@
 ```bash
 yarn install
 ```
-2. Build the native app
-```bash
-dotnet build src/HFXSim/HFXSim.sln
-```
+2. Build the native app using Visual Studio
 3. Update `apps.json` to reflect the binary path for `HFXSim.exe`
 4. Clean and build Finsemble
 ```bash
