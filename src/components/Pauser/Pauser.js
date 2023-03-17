@@ -5,7 +5,7 @@ const FSBLReady = () => {
 
 	try {
 		// Listen to the release channel and release when a message is received
-		FSBL.Clients.RouterClient.addListener(CHANNEL, (event) => {
+		FSBL.Clients.RouterClient.subscribe(CHANNEL, (error, event) => {
 			// Listen to transmitted events and publish ready when a message is received
 			console.log("event", event);
 			FSBL.publishReady();

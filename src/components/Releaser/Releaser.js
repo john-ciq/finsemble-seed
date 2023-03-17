@@ -7,7 +7,7 @@ const FSBLReady = () => {
 		const doRelease = () => {
 			const message = { date: new Date().getTime() };
 			console.log("sending release message", message);
-			FSBL.Clients.RouterClient.transmit(CHANNEL, message);
+			FSBL.Clients.RouterClient.publish(CHANNEL, message);
 
 			// TODO: Uncomment this to close the window after releasing
 			// finsembleWindow.close();
