@@ -27,7 +27,7 @@
 			"name": "Pauser",
 			"manifest": {
 				"bootParams": {
-					"stage": "authentication"
+					"stage": "preuser"
 				},
 				"waitForInitialization": true,
 				"appService": true,
