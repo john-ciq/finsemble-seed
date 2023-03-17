@@ -76,8 +76,7 @@
 			"name": "HFXSim",
 			"manifest": {
 				"window": {
-					"path": "C:\\Users\\john-\\dev\\finsemble-seed\\seed-8.4.1\\src\\HFXSim\\HFXSim\\bin\\Debug\\net5.0-windows\\HFXSim.exe",
-					"//path": "C:\\Users\\john-\\dev\\finsemble-seed\\seed-8.4.1\\public\\build\\components\\HFXSim\\HFXSim.exe",
+					"path": "C:\\Users\\john-\\dev\\finsemble-seed\\seed-8.4.1\\src\\HFXSim\\HFXSim\\bin\\Debug\\HFXSim.exe",
 					"//path-ERROR: this-opens-a-browser-window": "$applicationRoot/components/HFXSim/HFXSim.exe",
 					"//path-ERROR: assimilation-does-not-work-with-this": "build/components/HFXSim/HFXSim.exe",
 					"windowType": "native"
