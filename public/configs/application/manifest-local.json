@@ -3,6 +3,8 @@
 	"startup_app": {
 		"requireHandshake": true
 	},
+	"splashScreenImage": "",
+	"splashScreenTimeout": 1,
 	"appAssets": [
 		{
 			"src": "https://assets.finsemble.com/releases/8.4.1/assimilation/assimilation.zip",

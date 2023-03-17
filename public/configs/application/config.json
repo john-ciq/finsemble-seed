@@ -1,5 +1,11 @@
 {
 	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/applicationConfigFile.schema.json",
+	"authentication": {
+		"startup": {
+			"adapter": "PASSWORD",
+			"component": "AuthenticationApp"
+		}
+	},
 	"servicesConfig": {
 		"distributedStore": {
 			"initialStores": [
@@ -71,6 +77,9 @@
 			"hideTitleBars": false
 		},
 		"docking": {
+			"claimSpace": {
+				"enabled": false
+			},
 			"enabled": true,
 			"groupTileBuffer": 30,
 			"headerHeight": 32,
