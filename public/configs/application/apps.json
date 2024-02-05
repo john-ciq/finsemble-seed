@@ -3,6 +3,78 @@
 	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/appsConfigFile.schema.json",
 	"apps": [
 		{
+			"appId": "InjectedApp",
+			"name": "InjectedApp",
+			"type": "web",
+			"details": {
+				"url": "$applicationRoot/Injected/index.html"
+			},
+			"description": "Visualize market data in the leading FDC3 compliant technical chart.",
+			"hostManifests": {
+				"Finsemble": {
+					"window": {
+						"width": 800,
+						"height": 600,
+						"options": {
+							"minWidth": 175
+						}
+					},
+					"foreign": {
+						"components": {
+							"App Launcher": {
+								"launchableByUser": true
+							},
+							"Toolbar": {
+								"iconClass": "ff-chart-advanced"
+							},
+							"Window Manager": {
+								"FSBLHeader": true,
+								"persistWindowState": true,
+								"titlebarType": "injected"
+							}
+						}
+					}
+				}
+			},
+			"version": "1.0.0"
+		},
+		{
+			"appId": "BrowserViewApp",
+			"name": "BrowserViewApp",
+			"type": "web",
+			"details": {
+				"url": "$applicationRoot/BrowserView/index.html"
+			},
+			"description": "Visualize market data in the leading FDC3 compliant technical chart.",
+			"hostManifests": {
+				"Finsemble": {
+					"window": {
+						"width": 800,
+						"height": 600,
+						"options": {
+							"minWidth": 175
+						}
+					},
+					"foreign": {
+						"components": {
+							"App Launcher": {
+								"launchableByUser": true
+							},
+							"Toolbar": {
+								"iconClass": "ff-chart-advanced"
+							},
+							"Window Manager": {
+								"FSBLHeader": true,
+								"persistWindowState": true,
+								"titlebarType": "browserview"
+							}
+						}
+					}
+				}
+			},
+			"version": "1.0.0"
+		},
+		{
 			"appId": "ChartIQ Example App",
 			"name": "ChartIQ Example App",
 			"type": "web",

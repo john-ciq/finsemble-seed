@@ -71,6 +71,9 @@
 			"hideTitleBars": false
 		},
 		"docking": {
+			"claimSpace": {
+				"enabled": false
+			},
 			"enabled": true,
 			"groupTileBuffer": 30,
 			"headerHeight": 32,
@@ -114,5 +117,6 @@
 	},
 	"globalHotkeys": {},
 	"importConfig": ["$configRoot/application/appd.json", "$configRoot/application/apps.json"],
-	"toolbarMenus": {}
+	"toolbarMenus": {},
+	"windowTitleBarUrl": "$applicationRoot/WindowTitleBar/"
 }

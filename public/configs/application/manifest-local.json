@@ -10,7 +10,16 @@
 			"target": "AssimilationMain.exe"
 		}
 	],
+	"splashScreenImage": "",
 	"finsemble": {
+		"extensions": {
+			"preloads": {
+				"css": {
+					"url": "$applicationRoot/TitlebarCSS/index.js",
+					"autoload": "all"
+				}
+			}
+		},
 		"systemTrayIcon": "../../assets/img/Finsemble_SystemTray_Icon.png",
 		"waitForUpdate": false,
 		"bootConfig": {

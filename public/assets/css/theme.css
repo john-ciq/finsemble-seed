@@ -6,7 +6,6 @@ See https://documentation.chartiq.com/finsemble/tutorial-UIComponents.html#css
 */
 
 :root {
-	/*
     --core-primary: #22262f;
 
     --core-primary-1: #171A20;
@@ -41,5 +40,10 @@ See https://documentation.chartiq.com/finsemble/tutorial-UIComponents.html#css
     --font-weight-2: bold;
 
     --font-size: 12px;
-*/
+
+    font-stretch: semi-condensed;
+}
+
+.finsemble.desktop-active .fsbl-tab.fsbl-active-tab {
+    background-color: orange;
 }

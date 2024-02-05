@@ -1,0 +1,6 @@
+[
+	"./src/BrowserView/index.tsx",
+	"./src/Injected/index.tsx",
+	"./src/TitlebarCSS/index.ts",
+	"./src/WindowTitleBar/index.tsx"
+]
