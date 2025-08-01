@@ -3,6 +3,35 @@
 	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/appsConfigFile.schema.json",
 	"apps": [
 		{
+			"appId": "ConfirmClose",
+			"type": "web",
+			"details": {
+				"url": "$applicationRoot/ConfirmClose/index.html"
+			},
+			"hostManifests": {
+				"Finsemble": {
+					"window": {
+						"width": 800,
+						"height": 600,
+						"options": {
+							"minWidth": 175
+						}
+					},
+					"foreign": {
+						"components": {
+							"App Launcher": {
+								"launchableByUser": true
+							},
+							"Window Manager": {
+								"FSBLHeader": true,
+								"persistWindowState": true
+							}
+						}
+					}
+				}
+			}
+		},
+		{
 			"appId": "ChartIQ Example App",
 			"name": "ChartIQ Example App",
 			"type": "web",
