@@ -11,6 +11,20 @@
 		}
 	],
 	"finsemble": {
+		"availableDashbarItems": {
+			"stockWidget": {
+				"title": "Stock Widget",
+				"url": "https://www.google.com",
+				"width": 200,
+				"height": 200
+			},
+			"tickerWidget": {
+				"title": "Ticker Widget",
+				"url": "https://www.google.com",
+				"width": 200,
+				"height": 200
+			}
+		},
 		"systemTrayIcon": "../../assets/img/Finsemble_SystemTray_Icon.png",
 		"waitForUpdate": false,
 		"bootConfig": {

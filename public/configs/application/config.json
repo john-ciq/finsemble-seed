@@ -113,5 +113,95 @@
 	},
 	"globalHotkeys": {},
 	"importConfig": ["$configRoot/application/appd.json", "$configRoot/application/apps.json"],
-	"toolbarMenus": {}
+	"toolbarMenus": {},
+	"components": {
+		"Toolbar": {
+			"uiComponent": true,
+			"bootParams": {
+				"stage": "earlyuser",
+				"checkpoints": {
+					"initialize": {
+						"postStartupCompletion": true
+					}
+				}
+			},
+			"window": {
+				"data": {
+					"dashbar": {
+						"height": 150,
+						"widgetDividerWidth": 1,
+						"items": [
+							"stockWidget",
+							"tickerWidget"
+						]
+					}
+				},
+				"id": "launcher",
+				"url": "$applicationRoot/Toolbar/index.html",
+				"width": 600,
+				"height": 39,
+				"dockedHeight": 39,
+				"top": 0,
+				"left": 0,
+				"right": 0,
+				"position": "available",
+				"dockable": [
+					"top",
+					"bottom"
+				],
+				"maxHeight": 39,
+				"minHeight": 39,
+				"minWidth": 300,
+				"docked": "top",
+				"options": {
+					"autoShow": true,
+					"contextMenu": false,
+					"showTaskbarIcon": true,
+					"alwaysOnTop": false,
+					"resizable": true,
+					"cornerRounding": false
+				}
+			},
+			"component": {
+				"spawnOnStartup": true,
+				"canMinimize": false,
+				"canMaximize": false
+			},
+			"foreign": {
+				"services": {
+					"workspaceService": {
+						"global": true
+					},
+					"windowService": {
+						"allowGrouping": false
+					}
+				}
+			},
+			"childWindowOptions": {
+				"window": {
+					"addToWorkspace": false,
+					"maxHeight": null,
+					"minHeight": null,
+					"dockable": false,
+					"show": false,
+					"options": {
+						"resizable": false,
+						"autoShow": false
+					}
+				},
+				"foreign": {
+					"components": {
+						"Window Manager": {
+							"FSBLHeader": false
+						}
+					},
+					"services": {
+						"windowService": {
+							"manageWindowMovement": false
+						}
+					}
+				}
+			}
+		}
+	}
 }
