@@ -1,3 +1,4 @@
 [
-	"./src/ConfirmClose/index.tsx"
+	"./src/ConfirmCloseYesNoDialog/index.tsx",
+	"./src/ConfirmCloseWindowConfirm/index.tsx"
 ]

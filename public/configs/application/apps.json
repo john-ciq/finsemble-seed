@@ -3,10 +3,39 @@
 	"$schema": "../../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/appsConfigFile.schema.json",
 	"apps": [
 		{
-			"appId": "ConfirmClose",
+			"appId": "ConfirmCloseYesNoDialog",
 			"type": "web",
 			"details": {
-				"url": "$applicationRoot/ConfirmClose/index.html"
+				"url": "$applicationRoot/ConfirmCloseYesNoDialog/index.html"
+			},
+			"hostManifests": {
+				"Finsemble": {
+					"window": {
+						"width": 800,
+						"height": 600,
+						"options": {
+							"minWidth": 175
+						}
+					},
+					"foreign": {
+						"components": {
+							"App Launcher": {
+								"launchableByUser": true
+							},
+							"Window Manager": {
+								"FSBLHeader": true,
+								"persistWindowState": true
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"appId": "ConfirmCloseWindowConfirm",
+			"type": "web",
+			"details": {
+				"url": "$applicationRoot/ConfirmCloseWindowConfirm/index.html"
 			},
 			"hostManifests": {
 				"Finsemble": {

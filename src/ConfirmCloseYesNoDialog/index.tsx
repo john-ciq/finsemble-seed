@@ -43,20 +43,6 @@ const HelloWorld = () => {
 					}
 				}
 			);
-
-			// Alternate approach using window.confirm, but this seems to work correctly in some cases
-			//
-			// // Prompt the user to close
-			// const result = window.confirm("Are you sure you want to close?");
-			//
-			// // Handle the close
-			// if (result) {
-			// 	// User selected yes, close the window
-			// 	event.done();
-			// } else {
-			// 	// User selected no, cancel the close event
-			// 	event.cancel();
-			// }
 		});
 	})();
 
